@@ -23,13 +23,15 @@ void setup()
   
   fullScreen(); //1366*768
   background = loadImage("background.png");
-  background(background);
+  background.resize(width, height);
   
   p = new Player();
   p.setUser(100, height - 106); //y : the ground of background picture
 }
+
 void draw()
 {
   background(background);
   p.display();
+  p.update();
 }
