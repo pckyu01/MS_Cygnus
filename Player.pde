@@ -1,6 +1,5 @@
 import damkjer.ocd.*;
 
-
 class Player
 {
   PImage sprites[];
@@ -9,6 +8,7 @@ class Player
   PVector acc;
   int hp;
   int ad;
+  int jumpCount;
   
   Pstate state;
   Pdir dir;
@@ -18,8 +18,8 @@ class Player
   Player()
   {
     pos = new PVector(0, 0, 0);
-    vec = new PVector(0, 0, 0);
-    acc = new PVector(0, 0, 0);
+    vec = new PVector(3, 0, 0);
+    acc = new PVector(0, -0.1, 0);
     state = Pstate._STAND;
     dir = Pdir._RIGHT;
     sprites = new PImage[12];
@@ -75,6 +75,17 @@ class Player
         image(sprites[5], pos.x, pos.y);
       }
     }
+    if( state == Pstate._WALK)
+    {
+      if(dir == Pdir._LEFT)
+      {
+        image(sprites[6], pos.x, pos.y);
+      }
+      if(dir == Pdir._RIGHT)
+      {
+        image(sprites[7], pos.x, pos.y);
+      }
+    }
     if( state == Pstate._JUMP)
     {
       if(dir == Pdir._LEFT)
@@ -85,6 +96,29 @@ class Player
       {
         image(sprites[11], pos.x, pos.y);
       }
+    }
+    
+    if(pos.x <= 0)
+    {
+      pos.x += vec.x;
+    }
+    if(pos.x+sprites[0].width >= width)
+    {
+      pos.x -= vec.x;
+    }
+    
+    if(vec.y != 0)
+    {
+      pos.y -= vec.y;
+    }
+    vec.y += acc.y;
+    if(pos.y >= height -106)
+    {
+      state = Pstate._STAND;
+      pos.y = height - 106;
+      vec.y = 0;
+      acc.y = 0;
+      jumpCount = 2;
     }
   }
   
@@ -99,21 +133,15 @@ class Player
     {
       if (keyCode == LEFT)
       {
-        pos.x -= 3;
+        state = Pstate._WALK;
+        pos.x -= vec.x;
         dir = Pdir._LEFT;
       }
       if (keyCode == RIGHT)
       {
-        pos.x += 3;
+        state = Pstate._WALK;
+        pos.x += vec.x;
         dir = Pdir._RIGHT;
-      }
-      if (key == 'z')
-      {
-        attack();
-      }
-      if (key == 'x')
-      {
-        jump();
       }
     }
   }
@@ -126,26 +154,28 @@ class Player
   
   void jump()
   {
-    state = Pstate._JUMP;
-    
-    if(pos.y >= height -106)
+    if(jumpCount > 0)
     {
-      state = Pstate._STAND;
+      vec.y = 7;
+      acc.y = -0.5;
+      jumpCount -= 1;
+      state = Pstate._JUMP;
     }
   }
   
   void attack()
   {
     state = Pstate._ATTACK;
+    
   }
+  
   
   
 }
 
 enum Pstate
 {
-  _WALK1,
-  _WALK2,
+  _WALK,
   _STAND,
   _ATTACK,
   _ALERT,

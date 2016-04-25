@@ -22,11 +22,13 @@ void setup()
   bgm.play();
   
   fullScreen(); //1366*768
-  background = loadImage("background.png");
+  background = loadImage("background.jpg");
   background.resize(width, height);
   
   p = new Player();
   p.setUser(100, height - 106); //y : the ground of background picture
+
+  b = new Bullet();
 }
 
 void draw()
@@ -34,4 +36,17 @@ void draw()
   background(background);
   p.display();
   p.update();
+}
+
+void keyTyped()
+{
+  if (key == 'z')
+    {
+      p.attack();
+      b.shoot();
+    }
+    if (key == 'x')
+    {
+      p.jump();
+    }
 }
