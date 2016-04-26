@@ -7,6 +7,7 @@ class Player
   PVector vec;
   PVector acc;
   int hp;
+  int mp;
   int ad;
   int jumpCount;
   
@@ -35,6 +36,9 @@ class Player
     sprites[9] = loadImage("walk2_right.png");
     sprites[10] = loadImage("jump_left.png"); //jumping motion
     sprites[11] = loadImage("jump_right.png");
+    
+    hp = 300;
+    mp = 300;
   }
   
   
@@ -173,7 +177,19 @@ class Player
     
   }
   
-  
+  void status()
+  {
+    fill(255);
+    rect(170, height - 15, 450, 30);
+    
+    fill(255,0,0);
+    rect(150, height - 20, hp, 10);
+    text("HP : " +hp + "/300", 310, height - 17);
+    
+    fill(0,0,255);
+    rect(150, height - 5, mp, 10);
+    text("MP : " + mp + "/300", 310, height - 2);
+  }
   
 }
 

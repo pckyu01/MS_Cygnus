@@ -39,6 +39,7 @@ void draw()
   background(background);
   p.display();
   p.update();
+  p.status();
   for(int i = 0; i < Lb.size(); i++)
   {
     Lb.get(i).shootL();
