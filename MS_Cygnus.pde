@@ -10,7 +10,9 @@ AudioPlayer bgm;
 
 Player p;
 Cygnus c;
-Bullet b;
+
+ArrayList<Bullet> Lb; //bullet towards left
+ArrayList<Bullet> Rb; //buleet towards right
 
 PImage background;
 
@@ -28,7 +30,8 @@ void setup()
   p = new Player();
   p.setUser(100, height - 106); //y : the ground of background picture
 
-  b = new Bullet();
+  Lb = new ArrayList<Bullet>();
+  Rb = new ArrayList<Bullet>();
 }
 
 void draw()
@@ -36,17 +39,54 @@ void draw()
   background(background);
   p.display();
   p.update();
+  for(int i = 0; i < Lb.size(); i++)
+  {
+    Lb.get(i).shootL();
+  }
+  for(int i = 0; i < Rb.size(); i++)
+  {
+    Rb.get(i).shootR();
+  }
+  die(); //bullet disppears
 }
 
 void keyTyped()
 {
   if (key == 'z')
     {
-      p.attack();
-      b.shoot();
+      if(p.dir == Pdir._LEFT && Lb.size() < 5)
+      {
+        Lb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
+      }
+      if(p.dir == Pdir._RIGHT && Rb.size() < 5)
+      {
+        Rb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
+      }
     }
     if (key == 'x')
     {
       p.jump();
     }
+}
+
+void die()
+{
+  for(int i = 0; i < Lb.size(); i++)
+  {
+    float disL = dist(p.pos.x, p.pos.y, Lb.get(i).pos.x, Lb.get(i).pos.y); 
+
+    if(disL >= 500)
+    {
+      Lb.remove(i);
+    }
+  }
+  for(int i = 0; i < Rb.size(); i++)
+  {
+    float disR = dist(p.pos.x, p.pos.y, Rb.get(i).pos.x, Rb.get(i).pos.y);
+    
+    if(disR >= 500)
+    {
+      Rb.remove(i);
+    }
+  }
 }

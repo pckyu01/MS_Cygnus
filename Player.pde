@@ -143,6 +143,10 @@ class Player
         pos.x += vec.x;
         dir = Pdir._RIGHT;
       }
+      if(key == 'z')
+      {
+        attack();
+      }
     }
   }
   
