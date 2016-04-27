@@ -68,6 +68,13 @@ void keyTyped()
     {
       p.jump();
     }
+    if (key == 'c')
+    {
+      if(p.cooldown <= 0)
+      {
+        p.flash();
+      }
+    }
 }
 
 void die()

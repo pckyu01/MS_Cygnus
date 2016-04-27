@@ -10,6 +10,7 @@ class Player
   int mp;
   int ad;
   int jumpCount;
+  int cooldown;
   
   Pstate state;
   Pdir dir;
@@ -39,6 +40,7 @@ class Player
     
     hp = 300;
     mp = 300;
+    cooldown = 0;
   }
   
   
@@ -102,15 +104,17 @@ class Player
       }
     }
     
+    //collision to the wall
     if(pos.x <= 0)
     {
-      pos.x += vec.x;
+      pos.x = 0;
     }
     if(pos.x+sprites[0].width >= width)
     {
-      pos.x -= vec.x;
+      pos.x = width - sprites[0].width;
     }
     
+    //jumping system
     if(vec.y != 0)
     {
       pos.y -= vec.y;
@@ -123,6 +127,16 @@ class Player
       vec.y = 0;
       acc.y = 0;
       jumpCount = 2;
+    }
+    
+    //cooldown system
+    if(cooldown > 0)
+    {
+      cooldown--;
+    }
+    else if(cooldown == 0)
+    {
+      //do nothing
     }
   }
   
@@ -179,16 +193,33 @@ class Player
   
   void status()
   {
+    //background
     fill(255);
-    rect(170, height - 15, 450, 30);
-    
+    rect(225, height - 15, 520, 30);
+    //hp
     fill(255,0,0);
     rect(150, height - 20, hp, 10);
     text("HP : " +hp + "/300", 310, height - 17);
-    
+    //mp
     fill(0,0,255);
     rect(150, height - 5, mp, 10);
     text("MP : " + mp + "/300", 310, height - 2);
+    //cooltime
+    fill(0);
+    text("Cooldown :" + cooldown, 390, height-12);
+  }
+  
+  void flash()
+  {
+    if(dir == Pdir._LEFT)
+    {
+      pos.x -= 300;
+    }
+    else if(dir == Pdir._RIGHT)
+    {
+      pos.x += 300;
+    }
+    cooldown = 300;
   }
   
 }

@@ -1,5 +1,13 @@
 class Cygnus
 {
+  PImage sprites[];
+  PVector pos;
+  int hp;
+  
+  Cygnus()
+  {
+    
+  }
   
 }
 
