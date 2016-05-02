@@ -12,7 +12,7 @@ Player p;
 Cygnus c;
 
 ArrayList<Bullet> Lb; //bullet towards left
-ArrayList<Bullet> Rb; //buleet towards right
+ArrayList<Bullet> Rb; //bullet towards right
 
 PImage background;
 
@@ -30,6 +30,9 @@ void setup()
   p = new Player();
   p.setUser(100, height - 106); //y : the ground of background picture
 
+  c = new Cygnus();
+  c.setBoss(width/2, height - (c.sprites[0].height + 40));
+
   Lb = new ArrayList<Bullet>();
   Rb = new ArrayList<Bullet>();
 }
@@ -37,9 +40,17 @@ void setup()
 void draw()
 {
   background(background);
+  
+  //player
   p.display();
   p.update();
   p.status();
+  
+  //Boss
+  c.display();
+  c.status();
+  
+  //bullet
   for(int i = 0; i < Lb.size(); i++)
   {
     Lb.get(i).shootL();
@@ -49,19 +60,24 @@ void draw()
     Rb.get(i).shootR();
   }
   die(); //bullet disppears
+  hit(); //damage the boss
 }
 
 void keyTyped()
 {
   if (key == 'z')
     {
-      if(p.dir == Pdir._LEFT && Lb.size() < 5)
+      if(p.mp >= 50)
       {
-        Lb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
-      }
-      if(p.dir == Pdir._RIGHT && Rb.size() < 5)
-      {
-        Rb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
+        p.attack();
+        if(p.dir == Pdir._LEFT && Lb.size() < 5)
+        {
+          Lb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
+        }
+        if(p.dir == Pdir._RIGHT && Rb.size() < 5)
+        {
+          Rb.add(new Bullet(p.pos.x+30, p.pos.y+35, p.pos.z, 5));
+        }
       }
     }
     if (key == 'x')
@@ -96,5 +112,22 @@ void die()
     {
       Rb.remove(i);
     }
+  }
+}
+
+void hit()
+{
+  float c_w = c.sprites[0].width;
+  float c_h = c.sprites[0].height;
+  for(int i = 0; i < Lb.size(); i++)
+  {
+    if()
+    {
+      
+    }
+  }
+  for(int i = 0; i < Rb.size(); i++)
+  {
+    
   }
 }

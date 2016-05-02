@@ -32,13 +32,17 @@ class Bullet
   
   void shootL()
   {
+    pushMatrix();
     image(sprites[0], pos.x, pos.y);
     pos.x -= speed;
+    popMatrix();
   }
   void shootR()
   {
+    pushMatrix();
     image(sprites[1], pos.x, pos.y);
     pos.x += speed;
+    popMatrix();
   }
   
   

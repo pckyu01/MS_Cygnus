@@ -47,6 +47,7 @@ class Player
   
   void display()
   {
+    pushMatrix();
     rectMode(CENTER);
     if( state == Pstate._ALERT)
     {
@@ -103,6 +104,7 @@ class Player
         image(sprites[11], pos.x, pos.y);
       }
     }
+    popMatrix();
     
     //collision to the wall
     if(pos.x <= 0)
@@ -161,10 +163,6 @@ class Player
         pos.x += vec.x;
         dir = Pdir._RIGHT;
       }
-      if(key == 'z')
-      {
-        attack();
-      }
     }
   }
   
@@ -188,38 +186,56 @@ class Player
   void attack()
   {
     state = Pstate._ATTACK;
-    
+    mp -= 20;
   }
   
   void status()
   {
+    pushMatrix();
+    rectMode(CORNER);
+    
     //background
     fill(255);
-    rect(225, height - 15, 520, 30);
+    rect(0, height - 30, 470, 30);
     //hp
     fill(255,0,0);
-    rect(150, height - 20, hp, 10);
+    rect(0, height - 26, hp, 10);
     text("HP : " +hp + "/300", 310, height - 17);
     //mp
     fill(0,0,255);
-    rect(150, height - 5, mp, 10);
+    rect(0, height - 12, mp, 10);
     text("MP : " + mp + "/300", 310, height - 2);
     //cooltime
     fill(0);
     text("Cooldown :" + cooldown, 390, height-12);
+    popMatrix();
+    
+    //regen
+    if(hp < 300)
+    {
+      hp += 1;
+    }
+    if(mp < 300)
+    {
+      mp += 1;
+    }
   }
   
   void flash()
   {
-    if(dir == Pdir._LEFT)
+    if(mp >= 50)
     {
-      pos.x -= 300;
+      if(dir == Pdir._LEFT)
+      {
+        pos.x -= 300;
+      }
+      else if(dir == Pdir._RIGHT)
+      {
+        pos.x += 300;
+      }
+      cooldown = 300;
+      mp -= 50;
     }
-    else if(dir == Pdir._RIGHT)
-    {
-      pos.x += 300;
-    }
-    cooldown = 300;
   }
   
 }
