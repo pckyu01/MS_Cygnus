@@ -121,13 +121,20 @@ void hit()
   float c_h = c.sprites[0].height;
   for(int i = 0; i < Lb.size(); i++)
   {
-    if()
+    if(Lb.get(i).pos.x < (c.pos.x + c_w/3) && 
+       Lb.get(i).pos.x > (c.pos.x - c_w/3))
     {
-      
+      c.damage();
+      Lb.remove(i);
     }
   }
   for(int i = 0; i < Rb.size(); i++)
   {
-    
+    if(Rb.get(i).pos.x < (c.pos.x + c_w/3) && 
+       Rb.get(i).pos.x > (c.pos.x - c_w/3))
+    {
+      c.damage();
+      Rb.remove(i);
+    }
   }
 }

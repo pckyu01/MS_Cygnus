@@ -18,9 +18,13 @@ This program is motivated from an actual online game called MapleStory. Last sem
 
 <p>
   <h3>Milestone #2: May 2nd, 2015 </h3>
-  <strong>Goal:</strong> You should have a small prototype by the end of this milestone.
+  <strong>Goal:</strong> Make a prototype that people can play with, however not expect to play a complete game, just like a simulation with a character (no enemy)
   <ul>
-    <li>first task : who is doing it (if in team)</li>
+    <li>first task : As soon as the player code is complete, add another class to make bullets of the game.</li>
+    <li>second task : Add basic codes for the enemy entity.</li>
+    <li>third task : Make collision between the bullets and the enemy, also the damage function to the enemy when it is hit by the bullet.</li>
+
+
   </ul>
 </p>
 
