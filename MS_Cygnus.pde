@@ -14,6 +14,8 @@ Cygnus c;
 ArrayList<Bullet> Lb; //bullet towards left
 ArrayList<Bullet> Rb; //bullet towards right
 
+Spell s;
+
 PImage background;
 
 
@@ -35,6 +37,8 @@ void setup()
 
   Lb = new ArrayList<Bullet>();
   Rb = new ArrayList<Bullet>();
+  
+  s = new Spell();
 }
 
 void draw()
@@ -48,7 +52,21 @@ void draw()
   
   //Boss
   c.display();
+  c.update();
   c.status();
+  if(c.phase0)
+  {
+    c.move();
+  }
+  if(c.phase1)
+  {
+    c.phase1();
+    
+  }
+  if(c.phase2)
+  {
+    c.phase2();
+  }
   
   //bullet
   for(int i = 0; i < Lb.size(); i++)

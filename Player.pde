@@ -233,7 +233,7 @@ class Player
       {
         pos.x += 300;
       }
-      cooldown = 300;
+      cooldown = 200;
       mp -= 50;
     }
   }
