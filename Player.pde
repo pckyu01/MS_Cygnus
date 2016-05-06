@@ -238,6 +238,10 @@ class Player
     }
   }
   
+  void damage()
+  {
+    
+  }
 }
 
 enum Pstate

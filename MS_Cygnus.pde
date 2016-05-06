@@ -61,11 +61,12 @@ void draw()
   if(c.phase1)
   {
     c.phase1();
-    
+    s.display1(5);
   }
   if(c.phase2)
   {
     c.phase2();
+    s.display2(10);
   }
   
   //bullet

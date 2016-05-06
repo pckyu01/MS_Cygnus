@@ -128,13 +128,13 @@ class Cygnus
   
   void update()
   {
-    if(hp >= 700)
+    if(hp >= 900)
     {
       phase0 = true;
       phase1 = false;
       phase2 = false;
     }
-    if(hp >= 200 && hp < 700)
+    if(hp >= 400 && hp < 900)
     {
       phase0 = false;
       phase1 = true;
@@ -170,7 +170,7 @@ class Cygnus
   void move()
   {
     //if Cygnus is on left side of the player
-    if(p.pos.x - pos.x > 300)
+    if(p.pos.x - pos.x > 10)
     {
       dir = Cdir._RIGHT;
       state = Cstate._MOVE;
@@ -182,7 +182,7 @@ class Cygnus
     }
     
     //if Cygnus is on right side of the player
-    if(pos.x - p.pos.x > 300)
+    if(pos.x - p.pos.x > 10)
     {
       dir = Cdir._LEFT;
       state = Cstate._MOVE;
@@ -196,7 +196,7 @@ class Cygnus
   
   void damage()
   {
-    hp -= 100;
+    hp -= 10;
     //state = Cstate._HIT;
   }
   
