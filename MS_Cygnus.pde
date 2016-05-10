@@ -61,7 +61,7 @@ void draw()
   if(c.phase1)
   {
     c.phase1();
-    s.display1(5);
+    s.display1(15);
   }
   if(c.phase2)
   {
@@ -154,6 +154,43 @@ void hit()
     {
       c.damage();
       Rb.remove(i);
+    }
+  }
+  
+  //collision with meteor
+  for(int i = 0; i < s.m; i++)
+  {
+    if(
+    p.pos.x < s.MX[i] + s.meteor.width/2 &&
+    p.pos.x > s.MX[i] - s.meteor.width/2 &&
+    p.pos.y < s.MY[i] + s.meteor.height/2 &&
+    p.pos.y > s.MY[i] - s.meteor.height/2)
+    {
+      if(p.time == 100)
+      {
+        p.damage(10);
+      }
+    }
+  }
+  
+  //collision with windL
+  if(
+  p.pos.x < s.posL.x + s.windL.width/2 &&
+  p.pos.x > s.posL.x - s.windL.width/2)
+  {
+    if(p.time == 100)
+    {
+      p.damage(30);
+    }
+  }
+  //collision with windR
+  if(
+  p.pos.x < s.posR.x + s.windR.width/2 &&
+  p.pos.x > s.posR.x - s.windR.width/2)
+  {
+    if(p.time == 100)
+    {
+      p.damage(30);
     }
   }
 }

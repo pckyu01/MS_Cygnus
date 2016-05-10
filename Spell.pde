@@ -1,7 +1,7 @@
 class Spell
 {
   PImage meteor;
-  int m = 10;
+  int m = 20;
   int MX[];
   int MY[];
   int speed;
@@ -10,6 +10,7 @@ class Spell
   PVector posL;
   PImage windR;
   PVector posR;
+  int speedW;
   
   Spell()
   {
@@ -20,12 +21,13 @@ class Spell
     for(int i = 0; i < m; i++)
     {
       MX[i] = (int)random(0, width);
-      MY[i] = 0;
+      MY[i] = (int)random(0, 50);
     }
     windL = loadImage("wind_left.png");
-    posL = new PVector(0, 0, 0);
-    windR = loadImage("wind_left.png");
-    posL = new PVector(0, 0, 0);
+    posL = new PVector(width - windL.width, height - windL.height, 0);
+    windR = loadImage("wind_right.png");
+    posR = new PVector(0, height - windR.height, 0);
+    speedW = 2;
   }
   
   void display1(int x)
@@ -35,13 +37,13 @@ class Spell
     m = x;
     for(int i = 0; i < m; i++)
     {
-      speed = (int)random(1, 3);
+      speed = 3;
       MY[i] += speed;
       image(meteor, MX[i], MY[i]);
       if(MY[i] > height)
       {
         MX[i] = (int)random(0, width);
-        MY[i] = 0;
+        MY[i] = (int)random(0, 50);
       }
     }
     popMatrix();
@@ -54,17 +56,27 @@ class Spell
     m = x;
     for(int i = 0; i < m; i++)
     {
-      speed = (int)random(1, 3);
+      speed = 5;
       MY[i] += speed;
       image(meteor, MX[i], MY[i]);
       if(MY[i] > height)
       {
         MX[i] = (int)random(0, width);
-        MY[i] = 0;
+        MY[i] = (int)random(0, 50);
       }
     }
     
+    rectMode(CENTER);
+    image(windL, posL.x, posL.y);
+    posL.x += speedW * -1;
     
+    image(windR, posR.x, posR.y);
+    posR.x += speedW;
+    
+    if(posL.x > width - windL.width/3 || posL.x < 0)
+    {
+      speedW *= -1;
+    }
     popMatrix();
   }
 }

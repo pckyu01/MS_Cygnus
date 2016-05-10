@@ -140,7 +140,7 @@ class Cygnus
       phase1 = true;
       phase2 = false;
     }
-    if(hp > 0 && hp < 200)
+    if(hp > 0 && hp < 400)
     {
       phase0 = false;
       phase1 = false;
@@ -196,7 +196,7 @@ class Cygnus
   
   void damage()
   {
-    hp -= 10;
+    hp -= p.ad;
     //state = Cstate._HIT;
   }
   

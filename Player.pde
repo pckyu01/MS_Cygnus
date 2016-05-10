@@ -11,6 +11,7 @@ class Player
   int ad;
   int jumpCount;
   int cooldown;
+  int time;
   
   Pstate state;
   Pdir dir;
@@ -40,7 +41,9 @@ class Player
     
     hp = 300;
     mp = 300;
+    ad = 100;
     cooldown = 0;
+    time = 0;
   }
   
   
@@ -140,6 +143,16 @@ class Player
     {
       //do nothing
     }
+    
+    //invincible time when got hit
+    if(time < 100)
+    {
+      time++;
+    }
+    else if(time >= 100)
+    {
+      //do nothing
+    }
   }
   
   void update()
@@ -213,7 +226,8 @@ class Player
     //regen
     if(hp < 300)
     {
-      hp += 1;
+      //hp += 1;
+      //disabled this because it is overbalancing
     }
     if(mp < 300)
     {
@@ -238,9 +252,10 @@ class Player
     }
   }
   
-  void damage()
+  void damage(int x)
   {
-    
+    hp -= x;
+    time = 0;
   }
 }
 
