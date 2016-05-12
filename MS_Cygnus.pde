@@ -180,8 +180,8 @@ void hit()
   
   //collision with windL
   if(
-  p.pos.x < s.posL.x + s.windL.width/2 &&
-  p.pos.x > s.posL.x - s.windL.width/2)
+  p.pos.x < s.posL.x + s.windL.width/3 &&
+  p.pos.x > s.posL.x - s.windL.width/3)
   {
     if(c.phase2)
     {
@@ -193,8 +193,8 @@ void hit()
   }
   //collision with windR
   if(
-  p.pos.x < s.posR.x + s.windR.width/2 &&
-  p.pos.x > s.posR.x - s.windR.width/2)
+  p.pos.x < s.posR.x + s.windR.width/3 &&
+  p.pos.x > s.posR.x - s.windR.width/3)
   {
     if(c.phase2)
     {
