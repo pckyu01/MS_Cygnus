@@ -31,8 +31,10 @@ This program is motivated from an actual online game called MapleStory. Last sem
 <div>
   <h3>Milestone #3: May 11th, 2015 (For G block)</br>
   Milestone #3: May 12th, 2015 (For C block) </h3>
-  <strong>Goal:</strong> You should have iterated and improved on your prototype by the end of this milestone.
+  <strong>Goal:</strong> Finish the codes of the enemy entity and its attacking functions so the player can actually play with. Then, add any kind of resources to improve the whole program(game).
   <ul>
-    <li>first task : who is doing it (if in team)</li>
+    <li>first task : make sure the enemy works well including its movement, motion, and attack</li>
+    <li>second task : create codes for the collision between all the entities; player, enemy, bullet, etc.</li>
+    <li>third task : apply more variables to improve the program</li>
   </ul>
 </div>

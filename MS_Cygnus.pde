@@ -17,7 +17,8 @@ ArrayList<Bullet> Rb; //bullet towards right
 Spell s;
 
 PImage background;
-
+PImage victory;
+PImage GameOver;
 
 void setup()
 {
@@ -28,6 +29,8 @@ void setup()
   fullScreen(); //1366*768
   background = loadImage("background.jpg");
   background.resize(width, height);
+  victory = loadImage("Victory.png");
+  victory.resize(width, height);
   
   p = new Player();
   p.setUser(100, height - 106); //y : the ground of background picture
@@ -80,6 +83,8 @@ void draw()
   }
   die(); //bullet disppears
   hit(); //damage the boss
+  
+  ending(); //if the game ends
 }
 
 void keyTyped()
@@ -178,9 +183,12 @@ void hit()
   p.pos.x < s.posL.x + s.windL.width/2 &&
   p.pos.x > s.posL.x - s.windL.width/2)
   {
-    if(p.time == 100)
+    if(c.phase2)
     {
-      p.damage(30);
+      if(p.time == 100)
+      {
+        p.damage(30);
+      }
     }
   }
   //collision with windR
@@ -188,9 +196,32 @@ void hit()
   p.pos.x < s.posR.x + s.windR.width/2 &&
   p.pos.x > s.posR.x - s.windR.width/2)
   {
-    if(p.time == 100)
+    if(c.phase2)
     {
-      p.damage(30);
+      if(p.time == 100)
+      {
+        p.damage(30);
+      }
     }
+  }
+}
+
+void ending()
+{
+  //win
+  if(c.hp <= 0)
+  {
+    bgm.pause();
+    pushMatrix();
+    image(victory, 0, 0);
+    popMatrix();
+  }
+  //lose
+  if(p.hp <= 0)
+  {
+    bgm.pause();
+    pushMatrix();
+    image(GameOver, 0, 0);
+    popMatrix();
   }
 }

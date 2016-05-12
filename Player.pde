@@ -41,7 +41,7 @@ class Player
     
     hp = 300;
     mp = 300;
-    ad = 100;
+    ad = 10;
     cooldown = 0;
     time = 0;
   }
